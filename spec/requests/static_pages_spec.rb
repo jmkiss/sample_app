@@ -2,51 +2,29 @@ require 'spec_helper'
 
 describe "Static pages" do
 
-  let(:base_title) {"Ruby On Rails Tutorial Sample App"}
-
   describe "Home page" do
+    before {visit root_path}
 
-    it "should have the h1 'Sample App'" do
-      visit '/static_pages/home'
-      page.should have_selector('h1', :text => 'Sample App')
-    end
-    it "should have the title base" do 
-    	visit '/static_pages/home'
-    	page.should have_selector( "title", :text => "#{base_title}")
-    end
-    it "should not have a custom base title" do 
-      visit '/static_pages/home'
-      page.should_not have_selector('title', :text => '| home')
-    end 
+    it {page.should have_selector('h1', :text => 'Welcome To The Sample App')}
+    it {page.should have_selector( "title", text: full_title(''))}
+    it {page.should_not have_selector('title', :text => '| home')}
   end
+  
   describe "help page" do 
-  	it "should have the h1 'help'" do 
-  		visit '/static_pages/help'
-  		page.should have_selector('h1', :text => 'Help')
-  	end 
-  	it "should have the title 'Help'" do 
-    	visit '/static_pages/help'
-    	page.should have_selector('title', :text => "#{base_title} | Help")
-    end
+    before {visit help_path}
+  	it{page.should have_selector('h1', :text => 'Help')}
+  	it{page.should have_selector('title', text: full_title('Help'))}
   end 
+  
   describe "about page" do
-  	it "should have the h1 'about'" do 
-  		visit '/static_pages/about'
-  		page.should have_selector('h1', :text => 'About')
-  	end
-  	it "should have the title 'About'" do 
-    	visit '/static_pages/about'
-    	page.should have_selector('title', :text => "#{base_title} | About")
-    end
+    before {visit about_path}
+  	it{page.should have_selector('h1', :text => 'About')}
+  	it{page.should have_selector('title', text: full_title('About'))}
   end
+
   describe "contact page" do 
-    it "should have the h1 'contact'" do
-      visit '/static_pages/contact'
-      page.should have_selector('h1', :text => 'Contact')
+    before {visit contact_path}
+    it{page.should have_selector('h1', :text => 'Contact')}
+    it{page.should have_selector('title', text: full_title('Contact'))}
   end
-    it "should have the title 'contact'" do 
-      visit '/static_pages/contact'
-      page.should have_selector('title', :text => "#{base_title} | Contact")
-  end
-end
 end
