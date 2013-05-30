@@ -12,7 +12,7 @@ describe "Static pages" do
   
   describe "help page" do 
     before {visit help_path}
-  	it{page.should have_selector('h1', :text => 'Help')}
+  	it{page.should havea_selector('h1', :text => 'Help')}
   	it{page.should have_selector('title', text: full_title('Help'))}
   end 
   
